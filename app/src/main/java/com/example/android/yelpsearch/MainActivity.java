@@ -113,14 +113,14 @@ public class MainActivity extends AppCompatActivity
                 getString(R.string.pref_sort_default));
 //        String language = preferences.getString(getString(R.string.pref_language_key),
 //                getString(R.string.pref_language_default));
-//        String user = preferences.getString(getString(R.string.pref_user_key),"");
+        String city = preferences.getString(getString(R.string.pref_location_key),"USA");
 //        boolean searchInName = preferences.getBoolean(getString(R.string.pref_in_name_key), true);
 //        boolean searchInDescription = preferences.getBoolean(getString(R.string.pref_in_description_key), true);
 //        boolean searchInReadme = preferences.getBoolean(getString(R.string.pref_in_readme_key), false);
 
 //        String url = YelpUtils.buildYelpSearchURL(query, sort, language, user, searchInName,
 //                searchInDescription, searchInReadme);
-        String url = YelpUtils.buildYelpSearchURL(query);
+        String url = YelpUtils.buildYelpSearchURL(query, sort, city);
         Log.d(TAG, "querying search URL: " + url);
 
         Bundle args = new Bundle();

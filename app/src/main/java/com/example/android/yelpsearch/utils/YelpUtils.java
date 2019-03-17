@@ -12,17 +12,17 @@ import com.google.gson.Gson;
 import java.util.ArrayList;
 
 public class YelpUtils {
-    private final static String Yelp_SEARCH_BASE_URL = "https://api.yelp.com/v3/businesses/search";
-    private final static String Yelp_SEARCH_QUERY_PARAM = "term";
-    private final static String Yelp_SEARCH_LOCATION_PARAM = "location";
-
-    private final static String Yelp_SEARCH_SORT_VALUE = "stars";
-    private final static String Yelp_SEARCH_LANGUAGE_FORMAT_STR = "language:%s";
-    private final static String Yelp_SEARCH_USER_FORMAT_STR = "user:%s";
-    private final static String Yelp_SEARCH_SEARCH_IN_FORMAT_STR = "in:%s";
-    private final static String Yelp_SEARCH_IN_NAME = "name";
-    private final static String Yelp_SEARCH_IN_DESCRIPTION = "description";
-    private final static String Yelp_SEARCH_IN_README = "readme";
+    private final static String YELP_SEARCH_BASE_URL = "https://api.yelp.com/v3/businesses/search";
+    private final static String YELP_SEARCH_QUERY_PARAM = "term";
+    private final static String YELP_SEARCH_LOCATION_PARAM = "location";
+    private final static String YELP_SEARCH_SORT_PARAM = "sort_by";
+//    private final static String YELP_SEARCH_SORT_VALUE = "sort_by";
+    private final static String YELP_SEARCH_LANGUAGE_FORMAT_STR = "language:%s";
+    private final static String YELP_SEARCH_USER_FORMAT_STR = "user:%s";
+    private final static String YELP_SEARCH_SEARCH_IN_FORMAT_STR = "in:%s";
+    private final static String YELP_SEARCH_IN_NAME = "name";
+    private final static String YELP_SEARCH_IN_DESCRIPTION = "description";
+    private final static String YELP_SEARCH_IN_README = "readme";
 
     public static final String EXTRA_YELP_REST = "YelpUtils.YelpRest";
 
@@ -50,19 +50,30 @@ public class YelpUtils {
 
 
 
-    public static String buildYelpSearchURL(String query) {
-        return Uri.parse(Yelp_SEARCH_BASE_URL).buildUpon()
-                .appendQueryParameter(Yelp_SEARCH_QUERY_PARAM, "starbucks")
-                .appendQueryParameter(Yelp_SEARCH_LOCATION_PARAM, "corvallis")
-                .build()
-                .toString();
+    public static String buildYelpSearchURL(String query, String sort, String city) {
+        Uri.Builder builder = Uri.parse(YELP_SEARCH_BASE_URL).buildUpon();
+        builder.appendQueryParameter(YELP_SEARCH_QUERY_PARAM, query);
+        if (!city.equals("")) {
+            builder.appendQueryParameter(YELP_SEARCH_LOCATION_PARAM, city);
+
+        }
+        if (!sort.equals("")) {
+            builder.appendQueryParameter(YELP_SEARCH_SORT_PARAM, sort);
+        }
+
+        return builder.build().toString();
+//        return Uri.parse(YELP_SEARCH_BASE_URL).buildUpon()
+//                .appendQueryParameter(Yelp_SEARCH_QUERY_PARAM, "starbucks")
+//                .appendQueryParameter(Yelp_SEARCH_LOCATION_PARAM, "corvallis")
+//                .build()
+//                .toString();
     }
 //
 //    public static String buildYelpSearchURL(String query, String sort, String language,
 //                                              String user, boolean searchInName,
 //                                              boolean searchInDescription, boolean searchInReadme) {
 //
-//        Uri.Builder builder = Uri.parse(Yelp_SEARCH_BASE_URL).buildUpon();
+//        Uri.Builder builder = Uri.parse(YELP_SEARCH_BASE_URL).buildUpon();
 //
 //        /*
 //         * Language, username, and search-in terms are incorporated directly into the query
