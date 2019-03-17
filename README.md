@@ -1,1 +1,1 @@
-# final-project-final-project-team-2-yelpbook
+# Yelp Book - Android Mobile Application
