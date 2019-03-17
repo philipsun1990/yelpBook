@@ -11,16 +11,16 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
     @Override
     public void onCreatePreferences(Bundle bundle, String s) {
         addPreferencesFromResource(R.xml.prefs);
-        EditTextPreference pref = (EditTextPreference) findPreference(getString(R.string.pref_user_key));
-        pref.setSummary(pref.getText());
+//        EditTextPreference pref = (EditTextPreference) findPreference(getString(R.string.pref_user_key));
+//        pref.setSummary(pref.getText());
     }
 
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String s) {
-        if (s.equals(getString(R.string.pref_user_key))) {
-            EditTextPreference pref = (EditTextPreference) findPreference(s);
-            pref.setSummary(pref.getText());
-        }
+//        if (s.equals(getString(R.string.pref_user_key))) {
+//            EditTextPreference pref = (EditTextPreference) findPreference(s);
+//            pref.setSummary(pref.getText());
+//        }
     }
 
     @Override

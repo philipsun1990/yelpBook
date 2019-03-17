@@ -16,13 +16,14 @@
     <string name="pref_sort_key" translatable="false">pref_sort</string>
     <string name="pref_sort_title">Sort by</string>
     <string name="pref_sort_entry_best_match">Best match</string>
-    <string name="pref_sort_entry_stars">Stars</string>
-    <string name="pref_sort_value_stars" translatable="false">stars</string>
+    <string name="pref_sort_value_best_match" translatable="false">best_match</string>
+    <string name="pref_sort_entry_rating">Rating</string>
+    <string name="pref_sort_value_rating" translatable="false">rating</string>
     <string name="pref_sort_entry_forks">Forks</string>
     <string name="pref_sort_value_forks" translatable="false">forks</string>
     <string name="pref_sort_entry_updated">Most-recently updated</string>
     <string name="pref_sort_value_updated" translatable="false">updated</string>
-    <string name="pref_sort_default">@string/pref_sort_value_stars</string>
+    <string name="pref_sort_default">@string/pref_sort_value_best_match</string>
 
     <!-- Strings for programming language preference -->
     <string name="pref_language_key" translatable="false">pref_language</string>
