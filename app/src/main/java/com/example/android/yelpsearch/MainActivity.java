@@ -1,4 +1,4 @@
-package com.example.android.githubsearch;
+package com.example.android.yelpsearch;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -25,20 +25,21 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.example.android.githubsearch.data.GitHubRepo;
-import com.example.android.githubsearch.utils.GitHubUtils;
+import com.example.android.yelpsearch.R;
+import com.example.android.yelpsearch.data.YelpRest;
+import com.example.android.yelpsearch.utils.YelpUtils;
 
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity
-        implements GitHubSearchAdapter.OnSearchItemClickListener, LoaderManager.LoaderCallbacks<String>,
+        implements YelpSearchAdapter.OnSearchItemClickListener, LoaderManager.LoaderCallbacks<String>,
             NavigationView.OnNavigationItemSelectedListener {
 
     private static final String TAG = MainActivity.class.getSimpleName();
-    private static final String REPOS_ARRAY_KEY = "githubRepos";
-    private static final String SEARCH_URL_KEY = "githubSearchURL";
+    private static final String REPOS_ARRAY_KEY = "YelpRests";
+    private static final String SEARCH_URL_KEY = "YelpSearchURL";
 
-    private static final int GITHUB_SEARCH_LOADER_ID = 0;
+    private static final int Yelp_SEARCH_LOADER_ID = 0;
 
     private RecyclerView mSearchResultsRV;
     private EditText mSearchBoxET;
@@ -46,8 +47,8 @@ public class MainActivity extends AppCompatActivity
     private ProgressBar mLoadingPB;
     private DrawerLayout mDrawerLayout;
 
-    private GitHubSearchAdapter mGitHubSearchAdapter;
-    private ArrayList<GitHubRepo> mRepos;
+    private YelpSearchAdapter mYelpSearchAdapter;
+    private ArrayList<YelpRest> mRepos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,15 +74,15 @@ public class MainActivity extends AppCompatActivity
         mSearchResultsRV.setLayoutManager(new LinearLayoutManager(this));
         mSearchResultsRV.setHasFixedSize(true);
 
-        mGitHubSearchAdapter = new GitHubSearchAdapter(this);
-        mSearchResultsRV.setAdapter(mGitHubSearchAdapter);
+        mYelpSearchAdapter = new YelpSearchAdapter(this);
+        mSearchResultsRV.setAdapter(mYelpSearchAdapter);
 
         if (savedInstanceState != null && savedInstanceState.containsKey(REPOS_ARRAY_KEY)) {
-            mRepos = (ArrayList<GitHubRepo>) savedInstanceState.getSerializable(REPOS_ARRAY_KEY);
-            mGitHubSearchAdapter.updateSearchResults(mRepos);
+            mRepos = (ArrayList<YelpRest>) savedInstanceState.getSerializable(REPOS_ARRAY_KEY);
+            mYelpSearchAdapter.updateSearchResults(mRepos);
         }
 
-        getSupportLoaderManager().initLoader(GITHUB_SEARCH_LOADER_ID, null, this);
+        getSupportLoaderManager().initLoader(Yelp_SEARCH_LOADER_ID, null, this);
 
         Button searchButton = findViewById(R.id.btn_search);
         searchButton.setOnClickListener(new View.OnClickListener() {
@@ -89,7 +90,7 @@ public class MainActivity extends AppCompatActivity
             public void onClick(View v) {
                 String searchQuery = mSearchBoxET.getText().toString();
                 if (!TextUtils.isEmpty(searchQuery)) {
-                    doGitHubSearch(searchQuery);
+                    doYelpSearch(searchQuery);
                 }
             }
         });
@@ -106,7 +107,7 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    private void doGitHubSearch(String query) {
+    private void doYelpSearch(String query) {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         String sort = preferences.getString(getString(R.string.pref_sort_key),
                 getString(R.string.pref_sort_default));
@@ -117,21 +118,21 @@ public class MainActivity extends AppCompatActivity
         boolean searchInDescription = preferences.getBoolean(getString(R.string.pref_in_description_key), true);
         boolean searchInReadme = preferences.getBoolean(getString(R.string.pref_in_readme_key), false);
 
-//        String url = GitHubUtils.buildGitHubSearchURL(query, sort, language, user, searchInName,
+//        String url = YelpUtils.buildYelpSearchURL(query, sort, language, user, searchInName,
 //                searchInDescription, searchInReadme);
-        String url =GitHubUtils.buildGitHubSearchURL(query);
+        String url = YelpUtils.buildYelpSearchURL(query);
         Log.d(TAG, "querying search URL: " + url);
 
         Bundle args = new Bundle();
         args.putString(SEARCH_URL_KEY, url);
         mLoadingPB.setVisibility(View.VISIBLE);
-        getSupportLoaderManager().restartLoader(GITHUB_SEARCH_LOADER_ID, args, this);
+        getSupportLoaderManager().restartLoader(Yelp_SEARCH_LOADER_ID, args, this);
     }
 
     @Override
-    public void onSearchItemClick(GitHubRepo repo) {
+    public void onSearchItemClick(YelpRest repo) {
         Intent intent = new Intent(this, RepoDetailActivity.class);
-        intent.putExtra(GitHubUtils.EXTRA_GITHUB_REPO, repo);
+        intent.putExtra(YelpUtils.EXTRA_Yelp_REPO, repo);
         startActivity(intent);
     }
 
@@ -150,7 +151,7 @@ public class MainActivity extends AppCompatActivity
         if (bundle != null) {
             url = bundle.getString(SEARCH_URL_KEY);
         }
-        return new GitHubSearchLoader(this, url);
+        return new YelpSearchLoader(this, url);
     }
 
     @Override
@@ -159,8 +160,8 @@ public class MainActivity extends AppCompatActivity
         if (s != null) {
             mLoadingErrorTV.setVisibility(View.INVISIBLE);
             mSearchResultsRV.setVisibility(View.VISIBLE);
-            mRepos = GitHubUtils.parseGitHubSearchResults(s);
-            mGitHubSearchAdapter.updateSearchResults(mRepos);
+            mRepos = YelpUtils.parseYelpSearchResults(s);
+            mYelpSearchAdapter.updateSearchResults(mRepos);
         } else {
             mLoadingErrorTV.setVisibility(View.VISIBLE);
             mSearchResultsRV.setVisibility(View.INVISIBLE);

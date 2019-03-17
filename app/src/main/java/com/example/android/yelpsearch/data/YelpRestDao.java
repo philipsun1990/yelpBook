@@ -1,4 +1,4 @@
-package com.example.android.githubsearch.data;
+package com.example.android.yelpsearch.data;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.persistence.room.Dao;
@@ -9,16 +9,16 @@ import android.arch.persistence.room.Query;
 import java.util.List;
 
 @Dao
-public interface GitHubRepoDao {
+public interface YelpRestDao {
     @Insert
-    void insert(GitHubRepo repo);
+    void insert(YelpRest repo);
 
     @Delete
-    void delete(GitHubRepo repo);
+    void delete(YelpRest repo);
 
     @Query("SELECT * FROM repos")
-    LiveData<List<GitHubRepo>> getAllRepos();
+    LiveData<List<YelpRest>> getAllRepos();
 
     @Query("SELECT * FROM repos WHERE full_name = :fullName LIMIT 1")
-    LiveData<GitHubRepo> getRepoByName(String fullName);
+    LiveData<YelpRest> getRepoByName(String fullName);
 }

@@ -1,4 +1,4 @@
-package com.example.android.githubsearch;
+package com.example.android.yelpsearch;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
@@ -14,8 +14,9 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.android.githubsearch.data.GitHubRepo;
-import com.example.android.githubsearch.utils.GitHubUtils;
+import com.example.android.yelpsearch.R;
+import com.example.android.yelpsearch.data.YelpRest;
+import com.example.android.yelpsearch.utils.YelpUtils;
 
 public class RepoDetailActivity extends AppCompatActivity {
     private TextView mRepoNameTV;
@@ -23,8 +24,8 @@ public class RepoDetailActivity extends AppCompatActivity {
     private TextView mRepoDescriptionTV;
     private ImageView mRepoBookmarkIV;
 
-    private GitHubRepoViewModel mGitHubRepoViewModel;
-    private GitHubRepo mRepo;
+    private YelpRestViewModel mYelpRestViewModel;
+    private YelpRest mRepo;
     private boolean mIsSaved = false;
 
     @Override
@@ -37,19 +38,19 @@ public class RepoDetailActivity extends AppCompatActivity {
         mRepoDescriptionTV = findViewById(R.id.tv_repo_description);
         mRepoBookmarkIV = findViewById(R.id.iv_repo_bookmark);
 
-        mGitHubRepoViewModel = ViewModelProviders.of(this).get(GitHubRepoViewModel.class);
+        mYelpRestViewModel = ViewModelProviders.of(this).get(YelpRestViewModel.class);
 
         mRepo = null;
         Intent intent = getIntent();
-        if (intent != null && intent.hasExtra(GitHubUtils.EXTRA_GITHUB_REPO)) {
-            mRepo = (GitHubRepo) intent.getSerializableExtra(GitHubUtils.EXTRA_GITHUB_REPO);
+        if (intent != null && intent.hasExtra(YelpUtils.EXTRA_Yelp_REPO)) {
+            mRepo = (YelpRest) intent.getSerializableExtra(YelpUtils.EXTRA_Yelp_REPO);
             mRepoNameTV.setText(mRepo.full_name);
             mRepoStarsTV.setText("" + mRepo.stargazers_count);
             mRepoDescriptionTV.setText(mRepo.description);
 
-            mGitHubRepoViewModel.getGitHubRepoByName(mRepo.full_name).observe(this, new Observer<GitHubRepo>() {
+            mYelpRestViewModel.getYelpRestByName(mRepo.full_name).observe(this, new Observer<YelpRest>() {
                 @Override
-                public void onChanged(@Nullable GitHubRepo repo) {
+                public void onChanged(@Nullable YelpRest repo) {
                     if (repo != null) {
                         mIsSaved = true;
                         mRepoBookmarkIV.setImageResource(R.drawable.ic_bookmark_black_24dp);
@@ -66,9 +67,9 @@ public class RepoDetailActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if (mRepo != null) {
                     if (!mIsSaved) {
-                        mGitHubRepoViewModel.insertGitHubRepo(mRepo);
+                        mYelpRestViewModel.insertYelpRest(mRepo);
                     } else {
-                        mGitHubRepoViewModel.deleteGitHubRepo(mRepo);
+                        mYelpRestViewModel.deleteYelpRest(mRepo);
                     }
                 }
             }

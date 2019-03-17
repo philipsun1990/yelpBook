@@ -1,7 +1,9 @@
-package com.example.android.githubsearch;
+package com.example.android.yelpsearch;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.example.android.yelpsearch.R;
 
 public class SettingsActivity extends AppCompatActivity {
 

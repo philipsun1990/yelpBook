@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.android.githubsearch">
+    package="com.example.android.yelpsearch">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -14,28 +14,28 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
-            android:name=".SavedReposActivity"
-            android:parentActivityName=".MainActivity">
+            android:name="com.example.android.yelpsearch.SavedReposActivity"
+            android:parentActivityName="com.example.android.yelpsearch.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
+                android:value="com.example.android.yelpsearch.MainActivity" />
         </activity>
         <activity
-            android:name=".SettingsActivity"
-            android:parentActivityName=".MainActivity">
+            android:name="com.example.android.yelpsearch.SettingsActivity"
+            android:parentActivityName="com.example.android.yelpsearch.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
+                android:value="com.example.android.yelpsearch.MainActivity" />
         </activity>
         <activity
-            android:name=".RepoDetailActivity"
-            android:parentActivityName=".MainActivity">
+            android:name="com.example.android.yelpsearch.RepoDetailActivity"
+            android:parentActivityName="com.example.android.yelpsearch.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
+                android:value="com.example.android.yelpsearch.MainActivity" />
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name="com.example.android.yelpsearch.MainActivity"
             android:launchMode="singleTop"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>

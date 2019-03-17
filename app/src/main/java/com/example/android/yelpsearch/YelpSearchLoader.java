@@ -1,22 +1,22 @@
-package com.example.android.githubsearch;
+package com.example.android.yelpsearch;
 
 import android.content.Context;
 import android.support.annotation.Nullable;
 import android.support.v4.content.AsyncTaskLoader;
 import android.util.Log;
 
-import com.example.android.githubsearch.utils.NetworkUtils;
+import com.example.android.yelpsearch.utils.NetworkUtils;
 
 import java.io.IOException;
 
-public class GitHubSearchLoader extends AsyncTaskLoader<String> {
+public class YelpSearchLoader extends AsyncTaskLoader<String> {
 
-    private final static String TAG = GitHubSearchLoader.class.getSimpleName();
+    private final static String TAG = YelpSearchLoader.class.getSimpleName();
 
     private String mSearchResultsJSON;
     private String mURL;
 
-    GitHubSearchLoader(Context context, String url) {
+    YelpSearchLoader(Context context, String url) {
         super(context);
         mURL = url;
     }
@@ -37,7 +37,7 @@ public class GitHubSearchLoader extends AsyncTaskLoader<String> {
     @Override
     public String loadInBackground() {
         if (mURL != null) {
-            Log.d(TAG, "loading results from GitHub with URL: " + mURL);
+            Log.d(TAG, "loading results from Yelp with URL: " + mURL);
             String results = null;
             try {
                 results = NetworkUtils.doHTTPGet(mURL);

@@ -1,4 +1,4 @@
-package com.example.android.githubsearch.utils;
+package com.example.android.yelpsearch.utils;
 
 import java.io.IOException;
 

@@ -1,4 +1,4 @@
-package com.example.android.githubsearch;
+package com.example.android.Yelpsearch;
 
 import org.junit.Test;
 

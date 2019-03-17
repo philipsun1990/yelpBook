@@ -1,4 +1,4 @@
-package com.example.android.githubsearch;
+package com.example.android.yelpsearch;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
@@ -9,12 +9,13 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
-import com.example.android.githubsearch.data.GitHubRepo;
-import com.example.android.githubsearch.utils.GitHubUtils;
+import com.example.android.yelpsearch.R;
+import com.example.android.yelpsearch.data.YelpRest;
+import com.example.android.yelpsearch.utils.YelpUtils;
 
 import java.util.List;
 
-public class SavedReposActivity extends AppCompatActivity implements GitHubSearchAdapter.OnSearchItemClickListener {
+public class SavedReposActivity extends AppCompatActivity implements YelpSearchAdapter.OnSearchItemClickListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,22 +26,22 @@ public class SavedReposActivity extends AppCompatActivity implements GitHubSearc
         savedReposRV.setLayoutManager(new LinearLayoutManager(this));
         savedReposRV.setHasFixedSize(true);
 
-        final GitHubSearchAdapter adapter = new GitHubSearchAdapter(this);
+        final YelpSearchAdapter adapter = new YelpSearchAdapter(this);
         savedReposRV.setAdapter(adapter);
 
-        GitHubRepoViewModel viewModel = ViewModelProviders.of(this).get(GitHubRepoViewModel.class);
-        viewModel.getAllGitHubRepos().observe(this, new Observer<List<GitHubRepo>>() {
+        YelpRestViewModel viewModel = ViewModelProviders.of(this).get(YelpRestViewModel.class);
+        viewModel.getAllYelpRests().observe(this, new Observer<List<YelpRest>>() {
             @Override
-            public void onChanged(@Nullable List<GitHubRepo> gitHubRepos) {
-                adapter.updateSearchResults(gitHubRepos);
+            public void onChanged(@Nullable List<YelpRest> YelpRests) {
+                adapter.updateSearchResults(YelpRests);
             }
         });
     }
 
     @Override
-    public void onSearchItemClick(GitHubRepo repo) {
+    public void onSearchItemClick(YelpRest repo) {
         Intent intent = new Intent(this, RepoDetailActivity.class);
-        intent.putExtra(GitHubUtils.EXTRA_GITHUB_REPO, repo);
+        intent.putExtra(YelpUtils.EXTRA_Yelp_REPO, repo);
         startActivity(intent);
     }
 }

@@ -1,4 +1,4 @@
-package com.example.android.githubsearch;
+package com.example.android.yelpsearch;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -7,23 +7,24 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.android.githubsearch.data.GitHubRepo;
+import com.example.android.yelpsearch.R;
+import com.example.android.yelpsearch.data.YelpRest;
 
 import java.util.List;
 
-public class GitHubSearchAdapter extends RecyclerView.Adapter<GitHubSearchAdapter.SearchResultViewHolder> {
-    private List<GitHubRepo> mRepos;
+public class YelpSearchAdapter extends RecyclerView.Adapter<YelpSearchAdapter.SearchResultViewHolder> {
+    private List<YelpRest> mRepos;
     OnSearchItemClickListener mSeachItemClickListener;
 
     public interface OnSearchItemClickListener {
-        void onSearchItemClick(GitHubRepo repo);
+        void onSearchItemClick(YelpRest repo);
     }
 
-    GitHubSearchAdapter(OnSearchItemClickListener searchItemClickListener) {
+    YelpSearchAdapter(OnSearchItemClickListener searchItemClickListener) {
         mSeachItemClickListener = searchItemClickListener;
     }
 
-    public void updateSearchResults(List<GitHubRepo> repos) {
+    public void updateSearchResults(List<YelpRest> repos) {
         mRepos = repos;
         notifyDataSetChanged();
     }
@@ -60,13 +61,13 @@ public class GitHubSearchAdapter extends RecyclerView.Adapter<GitHubSearchAdapte
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    GitHubRepo searchResult = mRepos.get(getAdapterPosition());
+                    YelpRest searchResult = mRepos.get(getAdapterPosition());
                     mSeachItemClickListener.onSearchItemClick(searchResult);
                 }
             });
         }
 
-        public void bind(GitHubRepo repo) {
+        public void bind(YelpRest repo) {
             mSearchResultTV.setText(repo.full_name);
         }
     }

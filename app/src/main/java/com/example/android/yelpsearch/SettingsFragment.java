@@ -1,9 +1,11 @@
-package com.example.android.githubsearch;
+package com.example.android.yelpsearch;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.preference.EditTextPreference;
 import android.support.v7.preference.PreferenceFragmentCompat;
+
+import com.example.android.yelpsearch.R;
 
 public class SettingsFragment extends PreferenceFragmentCompat implements SharedPreferences.OnSharedPreferenceChangeListener {
     @Override
