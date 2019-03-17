@@ -8,10 +8,10 @@
     android:gravity="bottom">
 
     <ImageView
-        android:layout_width="72dp"
-        android:layout_height="72dp"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
         android:layout_margin="16dp"
-        android:src="@drawable/github_logo"
+        android:src="@drawable/yelp_logo"
         />
 
     <TextView

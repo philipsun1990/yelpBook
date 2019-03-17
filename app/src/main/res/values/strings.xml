@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Yelp Search</string>
+    <string name="app_name">Yelp Book</string>
     <string name="search_box_hint">Search Yelp...</string>
     <string name="search_button_text">Do Search</string>
     <string name="loading_error">Unable to run query.  Check internet.</string>
