@@ -7,7 +7,7 @@ import android.support.annotation.NonNull;
 
 import java.io.Serializable;
 
-@Entity(tableName = "repos")
+@Entity(tableName = "restaurant")
 public class YelpRest implements Serializable {
     @NonNull
     @PrimaryKey

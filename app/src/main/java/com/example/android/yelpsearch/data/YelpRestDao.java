@@ -16,9 +16,9 @@ public interface YelpRestDao {
     @Delete
     void delete(YelpRest repo);
 
-    @Query("SELECT * FROM repos")
+    @Query("SELECT * FROM restaurant")
     LiveData<List<YelpRest>> getAllRepos();
 
-    @Query("SELECT * FROM repos WHERE name = :fullName LIMIT 1")
+    @Query("SELECT * FROM restaurant WHERE name = :fullName LIMIT 1")
     LiveData<YelpRest> getRepoByName(String fullName);
 }
