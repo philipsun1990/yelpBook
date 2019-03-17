@@ -19,6 +19,6 @@ public interface YelpRestDao {
     @Query("SELECT * FROM repos")
     LiveData<List<YelpRest>> getAllRepos();
 
-    @Query("SELECT * FROM repos WHERE full_name = :fullName LIMIT 1")
+    @Query("SELECT * FROM repos WHERE name = :fullName LIMIT 1")
     LiveData<YelpRest> getRepoByName(String fullName);
 }

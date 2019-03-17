@@ -3,6 +3,8 @@ package com.example.android.yelpsearch.utils;
 import android.net.Uri;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
+import java.io.Serializable;
+
 
 import com.example.android.yelpsearch.data.YelpRest;
 import com.google.gson.Gson;
@@ -12,7 +14,6 @@ import java.util.ArrayList;
 public class YelpUtils {
     private final static String Yelp_SEARCH_BASE_URL = "https://api.yelp.com/v3/businesses/search";
     private final static String Yelp_SEARCH_QUERY_PARAM = "term";
-
     private final static String Yelp_SEARCH_LOCATION_PARAM = "location";
 
     private final static String Yelp_SEARCH_SORT_VALUE = "stars";
@@ -23,16 +24,36 @@ public class YelpUtils {
     private final static String Yelp_SEARCH_IN_DESCRIPTION = "description";
     private final static String Yelp_SEARCH_IN_README = "readme";
 
-    public static final String EXTRA_Yelp_REPO = "YelpUtils.YelpRest";
+    public static final String EXTRA_YELP_REST = "YelpUtils.YelpRest";
 
     public static class YelpSearchResults {
         public ArrayList<YelpRest> items;
     }
 
+    public static class GSONLocation implements Serializable {
+        public String address1;
+        public String city;
+    }
+    public static class GSONRestaurant implements Serializable{
+        public String name;
+        public String image_url;
+        public String url;
+        public String rating;
+        public  GSONLocation location;
+        public  String phone;
+
+    }
+
+    public static class GSONRestaurants{
+        public GSONRestaurant[] businesses;
+    }
+
+
+
     public static String buildYelpSearchURL(String query) {
         return Uri.parse(Yelp_SEARCH_BASE_URL).buildUpon()
                 .appendQueryParameter(Yelp_SEARCH_QUERY_PARAM, "starbucks")
-                .appendQueryParameter("location", "corvallis")
+                .appendQueryParameter(Yelp_SEARCH_LOCATION_PARAM, "corvallis")
                 .build()
                 .toString();
     }
@@ -72,32 +93,43 @@ public class YelpUtils {
 //        return builder.build().toString();
 //    }
 
-    @Nullable
-    private static String buildSearchInURLString(boolean searchInName, boolean searchInDescription,
-                                                 boolean searchInReadme) {
-        ArrayList<String> searchInTerms = new ArrayList<>();
-        if (searchInName) {
-            searchInTerms.add(Yelp_SEARCH_IN_NAME);
-        }
-        if (searchInDescription) {
-            searchInTerms.add(Yelp_SEARCH_IN_DESCRIPTION);
-        }
-        if (searchInReadme) {
-            searchInTerms.add(Yelp_SEARCH_IN_README);
-        }
-
-        if (!searchInTerms.isEmpty()) {
-            return TextUtils.join(",", searchInTerms);
-        } else {
-            return null;
-        }
-    }
+//    @Nullable
+//    private static String buildSearchInURLString(boolean searchInName, boolean searchInDescription,
+//                                                 boolean searchInReadme) {
+//        ArrayList<String> searchInTerms = new ArrayList<>();
+//        if (searchInName) {
+//            searchInTerms.add(Yelp_SEARCH_IN_NAME);
+//        }
+//        if (searchInDescription) {
+//            searchInTerms.add(Yelp_SEARCH_IN_DESCRIPTION);
+//        }
+//        if (searchInReadme) {
+//            searchInTerms.add(Yelp_SEARCH_IN_README);
+//        }
+//
+//        if (!searchInTerms.isEmpty()) {
+//            return TextUtils.join(",", searchInTerms);
+//        } else {
+//            return null;
+//        }
+//    }
 
     public static ArrayList<YelpRest> parseYelpSearchResults(String json) {
         Gson gson = new Gson();
-        YelpSearchResults results = gson.fromJson(json, YelpSearchResults.class);
-        if (results != null && results.items != null) {
-            return results.items;
+        GSONRestaurants results = gson.fromJson(json, GSONRestaurants.class);
+        if (results != null && results.businesses != null) {
+            ArrayList<YelpRest> yelpRestItems = new ArrayList<>();
+            for(GSONRestaurant restItem: results.businesses){
+                YelpRest yelpRestaurant = new YelpRest();
+                yelpRestaurant.name = restItem.name;
+                yelpRestaurant.html_url = restItem.url;
+                yelpRestaurant.rest_rating = restItem.rating;
+                yelpRestaurant.rest_phone = restItem.phone;
+                yelpRestaurant.location_city = restItem.location.city;
+                yelpRestaurant.location_address = restItem.location.address1;
+                yelpRestItems.add(yelpRestaurant);
+            }
+            return yelpRestItems;
         } else {
             return null;
         }

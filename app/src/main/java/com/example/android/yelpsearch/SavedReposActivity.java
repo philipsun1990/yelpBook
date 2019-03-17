@@ -41,7 +41,7 @@ public class SavedReposActivity extends AppCompatActivity implements YelpSearchA
     @Override
     public void onSearchItemClick(YelpRest repo) {
         Intent intent = new Intent(this, RepoDetailActivity.class);
-        intent.putExtra(YelpUtils.EXTRA_Yelp_REPO, repo);
+        intent.putExtra(YelpUtils.EXTRA_YELP_REST, repo);
         startActivity(intent);
     }
 }
