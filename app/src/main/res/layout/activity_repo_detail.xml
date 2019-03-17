@@ -49,12 +49,30 @@
             android:textColor="#000"/>
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/tv_repo_description"
+        <TextView
+            android:id="@+id/tv_rest_location_address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:textSize="22sp"/>
+        <TextView
+        android:id="@+id/tv_rest_location_city"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="16dp"
         android:textSize="22sp"/>
 
+        <TextView
+            android:id="@+id/tv_rest_phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:textSize="22sp"/>
+        <TextView
+            android:id="@+id/tv_rest_html_url"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:textSize="22sp"/>
 
 </LinearLayout>

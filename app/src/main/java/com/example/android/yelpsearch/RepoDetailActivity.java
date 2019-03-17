@@ -21,7 +21,11 @@ import com.example.android.yelpsearch.utils.YelpUtils;
 public class RepoDetailActivity extends AppCompatActivity {
     private TextView mRepoNameTV;
     private TextView mRepoStarsTV;
-    private TextView mRepoDescriptionTV;
+    private TextView mRestAddressTV;
+    private TextView mRestCityTV;
+
+    private TextView mRestPhoneTV;
+
     private ImageView mRepoBookmarkIV;
 
     private YelpRestViewModel mYelpRestViewModel;
@@ -35,20 +39,27 @@ public class RepoDetailActivity extends AppCompatActivity {
 
         mRepoNameTV = findViewById(R.id.tv_repo_name);
         mRepoStarsTV = findViewById(R.id.tv_repo_stars);
-        mRepoDescriptionTV = findViewById(R.id.tv_repo_description);
+        mRestAddressTV = findViewById(R.id.tv_rest_location_address);
+        mRestCityTV =  findViewById(R.id.tv_rest_location_city);
+        mRestPhoneTV = findViewById(R.id.tv_rest_phone);
+
+
         mRepoBookmarkIV = findViewById(R.id.iv_repo_bookmark);
 
         mYelpRestViewModel = ViewModelProviders.of(this).get(YelpRestViewModel.class);
 
         mRepo = null;
         Intent intent = getIntent();
-        if (intent != null && intent.hasExtra(YelpUtils.EXTRA_Yelp_REPO)) {
-            mRepo = (YelpRest) intent.getSerializableExtra(YelpUtils.EXTRA_Yelp_REPO);
-            mRepoNameTV.setText(mRepo.full_name);
-            mRepoStarsTV.setText("" + mRepo.stargazers_count);
-            mRepoDescriptionTV.setText(mRepo.description);
+        if (intent != null && intent.hasExtra(YelpUtils.EXTRA_YELP_REST)) {
+            mRepo = (YelpRest) intent.getSerializableExtra(YelpUtils.EXTRA_YELP_REST);
+            mRepoNameTV.setText(mRepo.name);
+            mRepoStarsTV.setText("" + mRepo.rest_rating);
+            mRestAddressTV.setText("Address: "+ mRepo.location_address  );
+            mRestCityTV.setText("City: " + mRepo.location_city);
+            
+            mRestPhoneTV.setText("Phone: " + mRepo.rest_phone);
 
-            mYelpRestViewModel.getYelpRestByName(mRepo.full_name).observe(this, new Observer<YelpRest>() {
+            mYelpRestViewModel.getYelpRestByName(mRepo.name).observe(this, new Observer<YelpRest>() {
                 @Override
                 public void onChanged(@Nullable YelpRest repo) {
                     if (repo != null) {
@@ -108,7 +119,7 @@ public class RepoDetailActivity extends AppCompatActivity {
 
     public void shareRepo() {
         if (mRepo != null) {
-            String shareText = getString(R.string.share_repo_text, mRepo.full_name, mRepo.html_url);
+            String shareText = getString(R.string.share_repo_text, mRepo.name, mRepo.html_url);
             ShareCompat.IntentBuilder.from(this)
                     .setType("text/plain")
                     .setText(shareText)

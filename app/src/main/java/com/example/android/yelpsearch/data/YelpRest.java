@@ -11,9 +11,12 @@ import java.io.Serializable;
 public class YelpRest implements Serializable {
     @NonNull
     @PrimaryKey
-    public String full_name;
+    public String name;
 
-    public String description;
     public String html_url;
-    public int stargazers_count;
+    public String rest_rating;
+    public String rest_phone;
+    public String location_city;
+    public String location_address;
+
 }

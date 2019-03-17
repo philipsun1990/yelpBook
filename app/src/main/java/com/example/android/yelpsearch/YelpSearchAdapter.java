@@ -68,7 +68,7 @@ public class YelpSearchAdapter extends RecyclerView.Adapter<YelpSearchAdapter.Se
         }
 
         public void bind(YelpRest repo) {
-            mSearchResultTV.setText(repo.full_name);
+            mSearchResultTV.setText(repo.name + " | " + repo.location_address);
         }
     }
 }
