@@ -21,7 +21,8 @@ import com.example.android.yelpsearch.utils.YelpUtils;
 public class RepoDetailActivity extends AppCompatActivity {
     private TextView mRepoNameTV;
     private TextView mRepoStarsTV;
-    private TextView mRestLocationTV;
+    private TextView mRestAddressTV;
+    private TextView mRestCityTV;
 
     private TextView mRestPhoneTV;
 
@@ -38,7 +39,8 @@ public class RepoDetailActivity extends AppCompatActivity {
 
         mRepoNameTV = findViewById(R.id.tv_repo_name);
         mRepoStarsTV = findViewById(R.id.tv_repo_stars);
-        mRestLocationTV = findViewById(R.id.tv_rest_location);
+        mRestAddressTV = findViewById(R.id.tv_rest_location_address);
+        mRestCityTV =  findViewById(R.id.tv_rest_location_city);
         mRestPhoneTV = findViewById(R.id.tv_rest_phone);
 
 
@@ -52,7 +54,9 @@ public class RepoDetailActivity extends AppCompatActivity {
             mRepo = (YelpRest) intent.getSerializableExtra(YelpUtils.EXTRA_YELP_REST);
             mRepoNameTV.setText(mRepo.name);
             mRepoStarsTV.setText("" + mRepo.rest_rating);
-            mRestLocationTV.setText("Location: "+ mRepo.location_address + ", " + mRepo.location_city );
+            mRestAddressTV.setText("Address: "+ mRepo.location_address  );
+            mRestCityTV.setText("City: " + mRepo.location_city);
+            
             mRestPhoneTV.setText("Phone: " + mRepo.rest_phone);
 
             mYelpRestViewModel.getYelpRestByName(mRepo.name).observe(this, new Observer<YelpRest>() {
