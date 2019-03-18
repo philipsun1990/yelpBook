@@ -17,15 +17,15 @@ public class YelpSearchAdapter extends RecyclerView.Adapter<YelpSearchAdapter.Se
     OnSearchItemClickListener mSeachItemClickListener;
 
     public interface OnSearchItemClickListener {
-        void onSearchItemClick(YelpRest repo);
+        void onSearchItemClick(YelpRest restaurant);
     }
 
     YelpSearchAdapter(OnSearchItemClickListener searchItemClickListener) {
         mSeachItemClickListener = searchItemClickListener;
     }
 
-    public void updateSearchResults(List<YelpRest> repos) {
-        mRepos = repos;
+    public void updateSearchResults(List<YelpRest> restaurants) {
+        mRepos = restaurants;
         notifyDataSetChanged();
     }
 
@@ -67,8 +67,8 @@ public class YelpSearchAdapter extends RecyclerView.Adapter<YelpSearchAdapter.Se
             });
         }
 
-        public void bind(YelpRest repo) {
-            mSearchResultTV.setText(repo.name + " | " + repo.location_address);
+        public void bind(YelpRest restaurant) {
+            mSearchResultTV.setText(restaurant.name + " | " + restaurant.location_address);
         }
     }
 }

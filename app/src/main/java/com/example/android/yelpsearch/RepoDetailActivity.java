@@ -61,8 +61,8 @@ public class RepoDetailActivity extends AppCompatActivity {
 
             mYelpRestViewModel.getYelpRestByName(mRepo.name).observe(this, new Observer<YelpRest>() {
                 @Override
-                public void onChanged(@Nullable YelpRest repo) {
-                    if (repo != null) {
+                public void onChanged(@Nullable YelpRest restaurant) {
+                    if (restaurant != null) {
                         mIsSaved = true;
                         mRepoBookmarkIV.setImageResource(R.drawable.ic_bookmark_black_24dp);
                     } else {

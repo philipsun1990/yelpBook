@@ -11,10 +11,10 @@ import java.util.List;
 @Dao
 public interface YelpRestDao {
     @Insert
-    void insert(YelpRest repo);
+    void insert(YelpRest restaurant);
 
     @Delete
-    void delete(YelpRest repo);
+    void delete(YelpRest restaurant);
 
     @Query("SELECT * FROM restaurant")
     LiveData<List<YelpRest>> getAllRepos();

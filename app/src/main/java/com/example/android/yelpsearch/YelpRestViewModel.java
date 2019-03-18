@@ -17,12 +17,12 @@ public class YelpRestViewModel extends AndroidViewModel {
         mYelpRestRepository = new YelpRestRepository(application);
     }
 
-    public void insertYelpRest(YelpRest repo) {
-        mYelpRestRepository.insertYelpRest(repo);
+    public void insertYelpRest(YelpRest restaurant) {
+        mYelpRestRepository.insertYelpRest(restaurant);
     }
 
-    public void deleteYelpRest(YelpRest repo) {
-        mYelpRestRepository.deleteYelpRest(repo);
+    public void deleteYelpRest(YelpRest restaurant) {
+        mYelpRestRepository.deleteYelpRest(restaurant);
     }
 
     public LiveData<List<YelpRest>> getAllYelpRests() {

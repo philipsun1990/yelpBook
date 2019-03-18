@@ -130,9 +130,9 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void onSearchItemClick(YelpRest repo) {
+    public void onSearchItemClick(YelpRest restaurant) {
         Intent intent = new Intent(this, RepoDetailActivity.class);
-        intent.putExtra(YelpUtils.EXTRA_YELP_REST, repo);
+        intent.putExtra(YelpUtils.EXTRA_YELP_REST, restaurant);
         startActivity(intent);
     }
 

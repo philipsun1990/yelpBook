@@ -14,12 +14,12 @@ public class YelpRestRepository {
         mYelpRestDao = db.YelpRestDao();
     }
 
-    public void insertYelpRest(YelpRest repo) {
-        new InsertAsyncTask(mYelpRestDao).execute(repo);
+    public void insertYelpRest(YelpRest restaurant) {
+        new InsertAsyncTask(mYelpRestDao).execute(restaurant);
     }
 
-    public void deleteYelpRest(YelpRest repo) {
-        new DeleteAsyncTask(mYelpRestDao).execute(repo);
+    public void deleteYelpRest(YelpRest restaurant) {
+        new DeleteAsyncTask(mYelpRestDao).execute(restaurant);
     }
 
     public LiveData<List<YelpRest>> getAllYelpRests() {
