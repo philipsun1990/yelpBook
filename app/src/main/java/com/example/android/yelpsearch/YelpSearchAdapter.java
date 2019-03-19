@@ -6,9 +6,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.ImageView;
+import android.content.Context;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+
+
+
 
 import com.example.android.yelpsearch.R;
 import com.example.android.yelpsearch.data.YelpRest;
+
+import org.w3c.dom.Text;
 
 import java.util.List;
 
@@ -17,15 +26,15 @@ public class YelpSearchAdapter extends RecyclerView.Adapter<YelpSearchAdapter.Se
     OnSearchItemClickListener mSeachItemClickListener;
 
     public interface OnSearchItemClickListener {
-        void onSearchItemClick(YelpRest restaurant);
+        void onSearchItemClick(YelpRest repo);
     }
 
     YelpSearchAdapter(OnSearchItemClickListener searchItemClickListener) {
         mSeachItemClickListener = searchItemClickListener;
     }
 
-    public void updateSearchResults(List<YelpRest> restaurants) {
-        mRepos = restaurants;
+    public void updateSearchResults(List<YelpRest> repos) {
+        mRepos = repos;
         notifyDataSetChanged();
     }
 
@@ -52,11 +61,16 @@ public class YelpSearchAdapter extends RecyclerView.Adapter<YelpSearchAdapter.Se
     }
 
     class SearchResultViewHolder extends RecyclerView.ViewHolder {
-        private TextView mSearchResultTV;
+        private TextView mSearchResultRestTV;
+        private TextView mSearchResultAddrtTV;
+        private ImageView mRestImgIV;
+
 
         public SearchResultViewHolder(View itemView) {
             super(itemView);
-            mSearchResultTV = itemView.findViewById(R.id.tv_search_result);
+            mSearchResultRestTV = itemView.findViewById(R.id.tv_search_result_rest);
+            mSearchResultAddrtTV = itemView.findViewById(R.id.tv_search_result_address);
+            mRestImgIV = itemView.findViewById(R.id.iv_rest_img);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -67,8 +81,16 @@ public class YelpSearchAdapter extends RecyclerView.Adapter<YelpSearchAdapter.Se
             });
         }
 
-        public void bind(YelpRest restaurant) {
-            mSearchResultTV.setText(restaurant.name + " | " + restaurant.location_address);
+        public void bind(YelpRest repo) {
+            mSearchResultRestTV.setText(repo.name );
+            mSearchResultAddrtTV.setText(repo.location_address + ", " + repo.location_city);
+
+            Glide.with(mRestImgIV.getContext())
+                    .load(repo.img_url)
+                    .apply(new RequestOptions().override(720, 720))
+                    .into(mRestImgIV);
+
+
         }
     }
 }

@@ -14,6 +14,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.android.yelpsearch.R;
 import com.example.android.yelpsearch.data.YelpRest;
 import com.example.android.yelpsearch.utils.YelpUtils;
@@ -27,6 +29,7 @@ public class RepoDetailActivity extends AppCompatActivity {
     private TextView mRestPhoneTV;
 
     private ImageView mRepoBookmarkIV;
+    private ImageView mrestImgDetailIV;
 
     private YelpRestViewModel mYelpRestViewModel;
     private YelpRest mRepo;
@@ -45,6 +48,7 @@ public class RepoDetailActivity extends AppCompatActivity {
 
 
         mRepoBookmarkIV = findViewById(R.id.iv_repo_bookmark);
+        mrestImgDetailIV = findViewById(R.id.iv_rest_img_detail);
 
         mYelpRestViewModel = ViewModelProviders.of(this).get(YelpRestViewModel.class);
 
@@ -58,6 +62,11 @@ public class RepoDetailActivity extends AppCompatActivity {
             mRestCityTV.setText("City: " + mRepo.location_city);
             
             mRestPhoneTV.setText("Phone: " + mRepo.rest_phone);
+
+            Glide.with(mrestImgDetailIV.getContext())
+                    .load(mRepo.img_url)
+//                    .apply(new RequestOptions().override(720, 720))
+                    .into(mrestImgDetailIV);
 
             mYelpRestViewModel.getYelpRestByName(mRepo.name).observe(this, new Observer<YelpRest>() {
                 @Override

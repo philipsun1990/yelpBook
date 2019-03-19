@@ -14,7 +14,7 @@ public abstract class AppDatabase extends RoomDatabase {
             synchronized (AppDatabase.class) {
                 if (INSTANCE == null) {
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
-                            AppDatabase.class, "Yelp_restaurant_db").build();
+                            AppDatabase.class, "Yelp_rests_db").build();
                 }
             }
         }
