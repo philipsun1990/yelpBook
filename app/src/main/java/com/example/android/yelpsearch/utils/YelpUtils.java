@@ -138,6 +138,7 @@ public class YelpUtils {
                 yelpRestaurant.rest_phone = restItem.phone;
                 yelpRestaurant.location_city = restItem.location.city;
                 yelpRestaurant.location_address = restItem.location.address1;
+                yelpRestaurant.img_url = restItem.image_url;
                 yelpRestItems.add(yelpRestaurant);
             }
             return yelpRestItems;
